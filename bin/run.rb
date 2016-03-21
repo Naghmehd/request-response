@@ -70,19 +70,22 @@ loop do
       @params  = @request[:params]
       puts @request.inspect
       if @request[:method] == "GET" && @params[:resource] == "users"
-        puts "HTTP/1.1 200 OK"
-        puts
-        puts "" #All of the users get printed here
+        USERS.each do |key, value|
+            puts "HTTP/1.1 200 OK"
+            puts
+            puts "Users: #{key}, value: #{value}" #All of the users get printed here
+        end
       end
-    #    puts "HTTP/1.1 200 ok"
-    #  elsif "GET http://localhost:3000/users/1 HTTP/1.1"
-     #
-    #   USERS[5]
-    #   puts "HTTP/1.1 200k"
-    #   else "GET http://localhost:3000/users/1 HTTP/1.1"
-     #
-    #   puts "HTTP/1.1 404"
-     #
-    #   end
+
   end
 end
+
+#  elsif @request[:method] == "GET" && @params[:resource] == "users[5]"
+  # puts "HTTP/1.1 200 OK"
+#
+#
+# else "@request[:method] == "GET" && @params[:resource] == "users"
+ #  puts "HTTP/1.1 404"
+#  USERS.select { |z| e.is_a? Hash}
+# puts "This name is not on the list"
+#   end
