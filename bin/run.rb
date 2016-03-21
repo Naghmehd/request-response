@@ -68,23 +68,28 @@ loop do
     else
       @request = parse(raw_request)
       @params  = @request[:params]
-      puts @request.inspect
-      if @request[:method] == "GET" && @params[:resource] == "users"
+      if @request[:method] == "GET" &&
+         @params[:resource] == "users" &&
+         (@params[:id].to_i - 1) >= 0
+
+        id = @params[:id].to_i - 1
+        puts "HTTP/1.1 200 OK"
+        puts
+        puts USERS[id]
+
+      elsif @request[:method] == "GET" && @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
         USERS.each do |user|
           user.each do |_, value|
-            print value
+            puts value
           end
         end
-      elsif @request[:method] == "GET" && @params[:id] == "users"
-        puts "HTTP/1.1 200 OK"
-        puts
-        puts USERS[:id]
       else @request[:method] == "GET" && @params[:resource] == "users"
-        puts "HTTP/1.1 404"
-        USERS.select { |z| e.is_a? Hash}
-        puts "This name is not on the list"
+         puts "HTTP/1.1 404"
+         puts
+        #  USERS.select { |zal| e.is_a? Hash}
+         puts "It was not found."
       end
 
   end
