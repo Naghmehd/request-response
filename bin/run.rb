@@ -41,12 +41,12 @@ end
 
 
 USERS = [
-  {"first_name" => "Justin", "last_name" => "Herrick", "age" => 12 },
+  {"first_name" => "Justin", "last_name" => "Herrick", "age" => 12},
   {"first_name" => "Rohit",  "last_name" => "Prabu",   "age" => 18},
   {"first_name" => "Lily",   "last_name" => "Smith",   "age" => 24},
   {"first_name" => "Cameron","last_name" => "Black",   "age" => 28},
   {"first_name" => "Andrea" ,"last_name" => "Logan",   "age" => 34},
-  {"first_name" => "Naghmeh","last_name" => "Shirazi", "age" => 32 },
+  {"first_name" => "Naghmeh","last_name" => "Shirazi", "age" => 32},
   {"first_name" => "Roy",    "last_name" => "Desi",    "age" => 19},
   {"first_name" => "Joy",    "last_name" => "Roger",   "age" => 25},
   {"first_name" => "Cathy",  "last_name" => "white",   "age" => 38},
@@ -70,18 +70,27 @@ loop do
       @params  = @request[:params]
       puts @request.inspect
       if @request[:method] == "GET" && @params[:resource] == "users"
-        USERS.each do |key, value|
-            puts "HTTP/1.1 200 OK"
-            puts
-            puts "Users: #{key}, value: #{value}" #All of the users get printed here
+        puts "HTTP/1.1 200 OK"
+        puts
+        USERS.each do |user|
+          user.each do |_, value|
+            print value
+          end
         end
+      elsif @request[:method] == "GET" && @params[:id] == "users"
+        puts "HTTP/1.1 200 OK"
+        puts
+        puts USERS[:id]
+      else @request[:method] == "GET" && @params[:resource] == "users"
+        puts "HTTP/1.1 404"
+        USERS.select { |z| e.is_a? Hash}
+        puts "This name is not on the list"
       end
 
   end
 end
 
-#  elsif @request[:method] == "GET" && @params[:resource] == "users[5]"
-  # puts "HTTP/1.1 200 OK"
+#
 #
 #
 # else "@request[:method] == "GET" && @params[:resource] == "users"
