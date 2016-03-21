@@ -69,37 +69,37 @@ loop do
       @request = parse(raw_request)
       @params  = @request[:params]
       if @request[:method] == "GET" &&
+        @params[:resource] == "users" &&
+        (@params[:id].to_i - 1) > USERS.length
+         puts "HTTP/1.1 404"
+         puts
+         puts "It was not found."
+      elsif @request[:method] == "GET" &&
          @params[:resource] == "users" &&
          (@params[:id].to_i - 1) >= 0
 
         id = @params[:id].to_i - 1
         puts "HTTP/1.1 200 OK"
         puts
-        puts USERS[id]
-
-      elsif @request[:method] == "GET" && @params[:resource] == "users"
+        puts USERS[id].values.join(" ")
+      elsif @request[:method] == "GET" &&
+            @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
         USERS.each do |user|
           user.each do |_, value|
-            puts value
+            print "#{value} "
           end
+          print "\n"
         end
-      else @request[:method] == "GET" && @params[:resource] == "users"
-         puts "HTTP/1.1 404"
-         puts
-        #  USERS.select { |zal| e.is_a? Hash}
-         puts "It was not found."
+        else
+            if @request[:method] == "GET" &&
+             @params[:resource] == "user"
+             user = nil
+             puts "ERROR!! 404"
+           end
+        end
+
       end
 
   end
-end
-
-#
-#
-#
-# else "@request[:method] == "GET" && @params[:resource] == "users"
- #  puts "HTTP/1.1 404"
-#  USERS.select { |z| e.is_a? Hash}
-# puts "This name is not on the list"
-#   end
