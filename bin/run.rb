@@ -1,4 +1,3 @@
-require_relative '../db/setup'
 # Remember to put the requires here for all the classes you write and want to use
 
 def parse_params(uri_fragments, query_param_string)
@@ -40,6 +39,21 @@ def parse(raw_request)
   }
 end
 
+
+USERS = [
+  {"first_name" => "Justin", "last_name" => "Herrick", "age" => 12 },
+  {"first_name" => "Rohit",  "last_name" => "Prabu",   "age" => 18},
+  {"first_name" => "Lily",   "last_name" => "Smith",   "age" => 24},
+  {"first_name" => "Cameron","last_name" => "Black",   "age" => 28},
+  {"first_name" => "Andrea" ,"last_name" => "Logan",   "age" => 34},
+  {"first_name" => "Naghmeh","last_name" => "Shirazi", "age" => 32 },
+  {"first_name" => "Roy",    "last_name" => "Desi",    "age" => 19},
+  {"first_name" => "Joy",    "last_name" => "Roger",   "age" => 25},
+  {"first_name" => "Cathy",  "last_name" => "white",   "age" => 38},
+  {"first_name" => "Bill" ,  "last_name" => "Gates",   "age" => 46},
+]
+
+
 system('clear')
 loop do
   print "Supply a valid HTTP Request URL (h for help, q to quit) > "
@@ -51,14 +65,24 @@ loop do
     puts "A valid HTTP Request looks like:"
     puts "\t'GET http://localhost:3000/students HTTP/1.1'"
     puts "Read more at : http://www.w3.org/Protocols/rfc2616/rfc2616-sec5.html"
-  else
-    @request = parse(raw_request)
-    @params  = @request[:params]
-    # Use the @request and @params ivars to full the request and
-    # return an appropriate response
-
-    # YOUR CODE GOES BELOW HERE
-
-    # YOUR CODE GOES ABOVE HERE  ^
+    else
+      @request = parse(raw_request)
+      @params  = @request[:params]
+      puts @request.inspect
+      if @request[:method] == "GET" && @params[:resource] == "users"
+        puts "HTTP/1.1 200 OK"
+        puts
+        puts "" #All of the users get printed here
+      end
+    #    puts "HTTP/1.1 200 ok"
+    #  elsif "GET http://localhost:3000/users/1 HTTP/1.1"
+     #
+    #   USERS[5]
+    #   puts "HTTP/1.1 200k"
+    #   else "GET http://localhost:3000/users/1 HTTP/1.1"
+     #
+    #   puts "HTTP/1.1 404"
+     #
+    #   end
   end
 end
