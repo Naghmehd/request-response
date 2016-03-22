@@ -139,7 +139,8 @@ loop do
         end
 
       else @request[:method] == "GET" &&
-           @params[:resource] == "user"
+           @params[:resource] == "user"&&
+           (@params[:id].to_i - 1) == 0
            puts "ERROR!! 404"
       end
   end
