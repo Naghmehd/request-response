@@ -1,29 +1,16 @@
-This folder structure should be suitable for starting a project that uses a database:
+Object of this code:
 
-* Fork this repo
-* Clone this repo
-* Run `bundle install` to install `active_record`
-* `rake generate:migration <NAME>` to create a migration (Don't include the `<` `>` in your name, it should also start with a capital)
-* `rake db:migrate` to run the migration and update the database
-* Create models in lib that subclass `ActiveRecord::Base`
-* ... ?
-* Profit
+* Be able to query, manipulate, and save rows in an array via URLs
+* Be able to create an app that uses conditionals to execute different branches of code
+* Be able to appropriate format responses
+* Be able to handle errors
 
+Steps to achieve the above objectives:
 
-## Rundown
-
-```
-.
-├── Gemfile             # Details which gems are required by the project
-├── README.md           # This file
-├── Rakefile            # Defines `rake generate:migration` and `db:migrate`
-├── config
-│   └── database.yml    # Defines the database config (e.g. name of file)
-├── console.rb          # `ruby console.rb` starts `pry` with models loaded
-├── db
-│   ├── dev.sqlite3     # Default location of the database file
-│   ├── migrate         # Folder containing generated migrations
-│   └── setup.rb        # `require`ing this file sets up the db connection
-└── lib                 # Your ruby code (models, etc.) should go here
-    └── all.rb          # Require this file to auto-require _all_ `.rb` files in `lib`
-```
+* Create an array of users. The users Array be full of hashes that have first_name, last_name, and age as fields.
+* Given this request GET http://localhost:3000/users HTTP/1.1 I should see ALL the users from the array printed out to me with an appropriate response code.
+* Given this request GET http://localhost:3000/users/1 HTTP/1.1 I should see ONLY the user from the array at that index.
+* Given this request GET http://localhost:3000/users/9999999 HTTP/1.1 I should see a message saying it was not found and the appropriate response code returned to me.
+* Given this request GET http://localhost:3000/users?first_name=s I should see ALL users from the array where first_name starts with s.
+* Given this request GET http://localhost:3000/users?limit=10&offset=10 I should see ONLY 10 users with id of greater than 10 (There must be 20 users in your db minimum)
+* Given this request DELETE http://localhost:3000/users/1 I should have the user associated with that ID deleted from the array and an appropriate response returned to me.

@@ -50,7 +50,7 @@ USERS = [
   {"first_name" => "Roy",    "last_name" => "Desi",    "age" => 19},
   {"first_name" => "Joy",    "last_name" => "Roger",   "age" => 25},
   {"first_name" => "Cathy",  "last_name" => "white",   "age" => 38},
-  {"first_name" => "Bill" ,  "last_name" => "Gates",   "age" => 46},
+  {"first_name" => "Sam" ,   "last_name" => "Gates",   "age" => 46},
   {"first_name" => "Aaron",  "last_name" => "Scott",   "age" => 12},
   {"first_name" => "Reema",  "last_name" => "Sandu",   "age" => 18},
   {"first_name" => "Marry",  "last_name" => "Darby",   "age" => 24},
