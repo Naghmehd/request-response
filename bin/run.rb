@@ -84,7 +84,7 @@ loop do
          puts "HTTP/1.1 404"
          puts
          puts "It was not found."
-
+#below is the code for printng by one index number
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users" &&
            (@params[:id].to_i - 1) >= 0
@@ -125,7 +125,7 @@ loop do
           end
           print "\n"
         end
-
+#below is the code to print all the users
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
@@ -136,6 +136,7 @@ loop do
           end
           print "\n"
         end
+
       else @request[:method] == "GET" &&
            @params[:resource] == "user"
            puts "ERROR!! 404"
