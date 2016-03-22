@@ -84,6 +84,7 @@ loop do
          puts "HTTP/1.1 404"
          puts
          puts "It was not found."
+
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users" &&
            (@params[:id].to_i - 1) >= 0
@@ -91,19 +92,41 @@ loop do
         puts "HTTP/1.1 200 OK"
         puts
         puts USERS[id].values.join(" ")
+#below is the code for printing user with "s" in first name
       elsif @request[:method] == "GET" &&
-            @params[:resource] == "users" &&
-           (@params[:id].to_i -1) >= 10
-        id = @params[:id].to_i - 1
+            @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
-        USERS.each do |user|
+        puts USERS.each { |user| user.map("S") }
+#below is the code for delete ID from array
+      elsif @request[:method] == "GET" &&
+            @params[:resource] == "users" &&
+           (@params[:id].to_i - 1) >= 0
+        id = @params[:id].to_i - 1
+        USERS.delet_at(2)
+        puts "HTTP/1.1 200 OK"
+        puts
+        puts USERS.each do |user|
           user.each do |_, value|
             print "#{value} "
           end
           print "\n"
         end
-      else @request[:method] == "GET" &&
+# below is the code for only 10 users with id of greater than 10
+      elsif @request[:method] == "GET" &&
+            @params[:resource] == "users" &&
+           (@params[:id].to_i - 1) >= 10
+        id = @params[:id].to_i - 1
+        puts "HTTP/1.1 200 OK"
+        puts
+        puts USERS.each do |user|
+          user.each do |_, value|
+            print "#{value} "
+          end
+          print "\n"
+        end
+
+      elsif @request[:method] == "GET" &&
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
@@ -113,12 +136,9 @@ loop do
           end
           print "\n"
         end
+      else @request[:method] == "GET" &&
+           @params[:resource] == "user"
+           puts "ERROR!! 404"
       end
   end
 end
-
-# if @request[:method] == "GET" &&
-#    @params[:resource] == "user"
-#    puts "ERROR!! 404"
-#    puts
-# end
