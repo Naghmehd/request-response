@@ -78,13 +78,14 @@ loop do
     else
       @request = parse(raw_request)
       @params  = @request[:params]
+# below code prints the error. works.
       if @request[:method] == "GET" &&
          @params[:resource] == "users" &&
         (@params[:id].to_i - 1) > USERS.length
          puts "HTTP/1.1 404"
          puts
          puts "It was not found."
-#below is the code for printng by one index number
+#below code for printng by one index number.works
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users" &&
            (@params[:id].to_i - 1) >= 0
@@ -92,18 +93,18 @@ loop do
         puts "HTTP/1.1 200 OK"
         puts
         puts USERS[id].values.join(" ")
-#below is the code for printing user with "s" in first name
+#below is the code for printing user with "s" in first name. Runs but doesn't print name
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
-        puts USERS.each { |user| user.map("S") }
-#below is the code for delete ID from array
-      elsif @request[:method] == "GET" &&
+        puts USERS.select { |user| "S" == user }
+#below is the code for delete ID from array, it's deleting but not printing the new list.
+      elsif @request[:method] == "DELETE" &&
             @params[:resource] == "users" &&
            (@params[:id].to_i - 1) >= 0
         id = @params[:id].to_i - 1
-        USERS.delet_at(2)
+        USERS.delete_at(2)
         puts "HTTP/1.1 200 OK"
         puts
         puts USERS.each do |user|
@@ -112,7 +113,7 @@ loop do
           end
           print "\n"
         end
-# below is the code for only 10 users with id of greater than 10
+# below is the code for only 10 users with id of greater than 10. Gives an error.
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users" &&
            (@params[:id].to_i - 1) >= 10
@@ -125,7 +126,7 @@ loop do
           end
           print "\n"
         end
-#below is the code to print all the users
+#below is the code to print all the initial 10 users. Works.
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"

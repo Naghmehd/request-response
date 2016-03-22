@@ -5,6 +5,11 @@ Object of this code:
 * Be able to appropriate format responses
 * Be able to handle errors
 
+Requirements:
+
+* Code must adhear to the ruby style guide.
+
+
 Steps to achieve the above objectives:
 
 * Create an array of users. The users Array be full of hashes that have first_name, last_name, and age as fields.
