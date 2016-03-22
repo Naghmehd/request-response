@@ -51,6 +51,16 @@ USERS = [
   {"first_name" => "Joy",    "last_name" => "Roger",   "age" => 25},
   {"first_name" => "Cathy",  "last_name" => "white",   "age" => 38},
   {"first_name" => "Bill" ,  "last_name" => "Gates",   "age" => 46},
+  {"first_name" => "Aaron",  "last_name" => "Scott",   "age" => 12},
+  {"first_name" => "Reema",  "last_name" => "Sandu",   "age" => 18},
+  {"first_name" => "Marry",  "last_name" => "Darby",   "age" => 24},
+  {"first_name" => "Chetan", "last_name" => "Rai",     "age" => 28},
+  {"first_name" => "Alex" ,  "last_name" => "lamba",   "age" => 34},
+  {"first_name" => "Nick",   "last_name" => "Jones",   "age" => 32},
+  {"first_name" => "Dave",   "last_name" => "Watts",   "age" => 19},
+  {"first_name" => "Eric",   "last_name" => "McNinch", "age" => 25},
+  {"first_name" => "Kim",    "last_name" => "Smallwood","age" => 38},
+  {"first_name" => "Lisa" ,  "last_name" => "Munter",   "age" => 46},
 ]
 
 
@@ -69,20 +79,31 @@ loop do
       @request = parse(raw_request)
       @params  = @request[:params]
       if @request[:method] == "GET" &&
-        @params[:resource] == "users" &&
+         @params[:resource] == "users" &&
         (@params[:id].to_i - 1) > USERS.length
          puts "HTTP/1.1 404"
          puts
          puts "It was not found."
       elsif @request[:method] == "GET" &&
-         @params[:resource] == "users" &&
-         (@params[:id].to_i - 1) >= 0
-
+            @params[:resource] == "users" &&
+           (@params[:id].to_i - 1) >= 0
         id = @params[:id].to_i - 1
         puts "HTTP/1.1 200 OK"
         puts
         puts USERS[id].values.join(" ")
       elsif @request[:method] == "GET" &&
+            @params[:resource] == "users" &&
+           (@params[:id].to_i -1) >= 10
+        id = @params[:id].to_i - 1
+        puts "HTTP/1.1 200 OK"
+        puts
+        USERS.each do |user|
+          user.each do |_, value|
+            print "#{value} "
+          end
+          print "\n"
+        end
+      else @request[:method] == "GET" &&
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
@@ -92,14 +113,12 @@ loop do
           end
           print "\n"
         end
-        else
-            if @request[:method] == "GET" &&
-             @params[:resource] == "user"
-             user = nil
-             puts "ERROR!! 404"
-           end
-        end
-
       end
-
   end
+end
+
+# if @request[:method] == "GET" &&
+#    @params[:resource] == "user"
+#    puts "ERROR!! 404"
+#    puts
+# end
