@@ -40,7 +40,7 @@ def parse(raw_request)
 end
 
 
-USERS = [
+@users = [
   {"first_name" => "Justin", "last_name" => "Herrick", "age" => 12},
   {"first_name" => "Rohit",  "last_name" => "Prabu",   "age" => 18},
   {"first_name" => "Lily",   "last_name" => "Smith",   "age" => 24},
@@ -81,7 +81,7 @@ loop do
 # below code prints the error. works.
       if @request[:method] == "GET" &&
          @params[:resource] == "users" &&
-        (@params[:id].to_i - 1) > USERS.length
+        (@params[:id].to_i - 1) > @users.length
          puts "HTTP/1.1 404"
          puts
          puts "It was not found."
@@ -92,35 +92,35 @@ loop do
         id = @params[:id].to_i - 1
         puts "HTTP/1.1 200 OK"
         puts
-        puts USERS[id].values.join(" ")
-#below is the code for printing user with "s" in first name. Runs but doesn't print name
+        puts @users[id].values.join(" ")
+#below is the code for printing user with "s" in first name. 
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
-        puts USERS.select { |user| "S" == user }
-#below is the code for delete ID from array, it's deleting but not printing the new list.
+        puts @users.select { |user| "S" == user }
+#below is the code for delete ID from array.
       elsif @request[:method] == "DELETE" &&
             @params[:resource] == "users" &&
            (@params[:id].to_i - 1) >= 0
         id = @params[:id].to_i - 1
-        USERS.delete_at(2)
+        @users.delete_at(2)
         puts "HTTP/1.1 200 OK"
         puts
-        puts USERS.each do |user|
+        puts @users.each do |user|
           user.each do |_, value|
             print "#{value} "
           end
           print "\n"
         end
-# below is the code for only 10 users with id of greater than 10. Gives an error.
+# below is the code for only 10 users with id of greater than 10.
       elsif @request[:method] == "GET" &&
             @params[:resource] == "users" &&
-           (@params[:id].to_i - 1) >= 10
+           (@params[:id].to_i - 1) >= 0
         id = @params[:id].to_i - 1
         puts "HTTP/1.1 200 OK"
         puts
-        puts USERS.each do |user|
+        puts @users(1..20).each do |user|
           user.each do |_, value|
             print "#{value} "
           end
@@ -131,7 +131,7 @@ loop do
             @params[:resource] == "users"
         puts "HTTP/1.1 200 OK"
         puts
-        USERS.each do |user|
+        @users.each do |user|
           user.each do |_, value|
             print "#{value} "
           end
